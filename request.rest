@@ -1,0 +1,208 @@
+### Base URL
+@baseUrl = http://localhost:3000/api
+
+### ================================
+### POST API ENDPOINTS
+### ================================
+
+### 1. Add a New Post
+POST {{baseUrl}}/posts
+Content-Type: application/json
+
+{
+  "title": "My First Post",
+  "content": "This is the content of my first post. It contains some interesting information.",
+  "senderId": "user123"
+}
+
+###
+
+### 2. Get All Posts
+GET {{baseUrl}}/posts
+
+###
+
+### 3. Get a Post by ID - Format: /post/<post_id>
+GET {{baseUrl}}/post/1
+
+###
+
+### 4. Get Posts by Sender - Format: /post?sender=<sender_id>
+GET {{baseUrl}}/post?sender=user123
+
+###
+
+### 5. Update a Post - PUT method with post ID in URL
+PUT {{baseUrl}}/post/1
+Content-Type: application/json
+
+{
+  "title": "Updated Post Title",
+  "content": "This is the updated content of the post with new information."
+}
+
+###
+
+### Optional: Delete a Post (for complete CRUD)
+DELETE {{baseUrl}}/post/1
+
+###
+
+### ================================
+### COMMENTS API ENDPOINTS (Full CRUD)
+### ================================
+
+### 1. Create a New Comment
+POST {{baseUrl}}/comments
+Content-Type: application/json
+
+{
+  "content": "This is a great post! Thanks for sharing.",
+  "authorId": "commenter456",
+  "postId": 1
+}
+
+###
+
+### 2. Get All Comments
+GET {{baseUrl}}/comments
+
+###
+
+### 3. Get Comment by ID
+GET {{baseUrl}}/comments/1
+
+###
+
+### 4. Get All Comments for a Specific Post
+GET {{baseUrl}}/post/1/comments
+
+###
+
+### 5. Update a Comment
+PUT {{baseUrl}}/comments/1
+Content-Type: application/json
+
+{
+  "content": "This is an updated comment with more details and information."
+}
+
+###
+
+### 6. Delete a Comment
+DELETE {{baseUrl}}/comments/1
+
+###
+
+### ================================
+### SAMPLE DATA CREATION SEQUENCE
+### ================================
+
+### Create sample posts for testing
+POST {{baseUrl}}/posts
+Content-Type: application/json
+
+{
+  "title": "Introduction to Node.js",
+  "content": "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine.",
+  "senderId": "dev_user_1"
+}
+
+###
+
+POST {{baseUrl}}/posts
+Content-Type: application/json
+
+{
+  "title": "Express.js Basics",
+  "content": "Express.js is a minimal and flexible Node.js web application framework.",
+  "senderId": "dev_user_2"
+}
+
+###
+
+POST {{baseUrl}}/posts
+Content-Type: application/json
+
+{
+  "title": "RESTful API Design",
+  "content": "REST is an architectural style for designing networked applications.",
+  "senderId": "dev_user_1"
+}
+
+###
+
+### Create sample comments for testing
+POST {{baseUrl}}/comments
+Content-Type: application/json
+
+{
+  "content": "Great explanation! Very helpful for beginners.",
+  "authorId": "reader_123",
+  "postId": 1
+}
+
+###
+
+POST {{baseUrl}}/comments
+Content-Type: application/json
+
+{
+  "content": "I agree! Express makes web development much easier.",
+  "authorId": "developer_456",
+  "postId": 2
+}
+
+###
+
+POST {{baseUrl}}/comments
+Content-Type: application/json
+
+{
+  "content": "Could you provide more examples?",
+  "authorId": "student_789",
+  "postId": 1
+}
+
+###
+
+### ================================
+### ERROR TESTING
+### ================================
+
+### Test getting non-existent post
+GET {{baseUrl}}/post/999
+
+###
+
+### Test creating post with missing data
+POST {{baseUrl}}/posts
+Content-Type: application/json
+
+{
+  "title": "Incomplete Post"
+}
+
+###
+
+### Test creating comment for non-existent post
+POST {{baseUrl}}/comments
+Content-Type: application/json
+
+{
+  "content": "Comment for non-existent post",
+  "authorId": "test_user",
+  "postId": 999
+}
+
+###
+
+### Test updating non-existent comment
+PUT {{baseUrl}}/comments/999
+Content-Type: application/json
+
+{
+  "content": "This comment doesn't exist"
+}
+
+###
